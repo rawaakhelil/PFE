@@ -4,10 +4,7 @@ import MainRoute from './Routes/MainRoutes';
 
 function App() {
   return (
-    <div className="">
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className="dark:bg-blue-950">
     <MainRoute />
     </div>
   );

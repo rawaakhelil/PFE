@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 const PrivateRoute = ({ Children }) => {
 
     const cookies = new Cookies();
-    let user = null;
+    let user;
     user = cookies.get('user');
 
     if (!user) {

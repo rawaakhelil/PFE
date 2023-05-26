@@ -10,105 +10,148 @@ import { FaRegChartBar, FaHandsHelping } from "react-icons/fa";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 import { GeneralContext } from "../../hooks/context/GeneralContext";
 import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Cookies from "universal-cookie";
+import swal from "sweetalert";
 
 const Sidebar = () => {
+  const location = useLocation();
+  const cookies = new Cookies();
   const menu = useContext(GeneralContext);
 
+  let user = cookies.get("user");
+
+  const logout = async () => {
+    swal({
+      title: "Are you sure?",
+      text: "Are you sure that you want to LogOut?",
+      icon: "warning",
+      dangerMode: true,
+    }).then((willDelete) => {
+      cookies.remove("user");
+      return window.location.reload();
+    });
+  };
   return (
     <div
-      className={`sidebar h-screen   transition-all delay-300 ease-in-out rounded-lg bg-gray-100 ${
-        menu.menuOpen ? "w-64" : "w-24"
-      }`}
+      className={`sidebar px-4 h-screen transition-all delay-300 ease-in-out bg-gray-100
+       dark:bg-blue-950 ${menu.menuOpen ? "w-64" : "w-24"}`}
     >
-      <div
-        className="  flex flex-col  items-center px-8 py-8 text-gray-400 transition-colors duration-300 transform rounded-lg
-        dark:text-blue-800 hover:bg-blue-800 dark:hover:bg-blue-800 dark:hover:text-blue-200 hover:text-blue-700 text-3xl "
+      <Link
+        to="/"
+        className={`flex flex-col  items-center rounded my-2 py-4 dark:text-white dark:hover:bg-blue-100
+          hover:bg-blue-900 dark:hover:text-blue-200
+          hover:text-blue-100 text-3xl transition-all delay-300 ease-in-out ${
+            location.pathname === "/"
+              ? "bg-blue-800 dark:hover:bg-blue-900  text-blue-100"
+              : "text-blue-900 "
+          }`}
       >
-        
-        <RiDashboardLine className="  cursor-pointer " />
-        <a href="dashboard"
-        
-          className={` transition-all delay-300 ease-in-out ${
+        <RiDashboardLine className=" transition-all delay-100 ease-in-out cursor-pointer " />
+        <span
+          className={` transition-all delay-100 ease-in-out ${
             menu.menuOpen ? "text-lg" : "hidden "
           }`}
         >
           Dashboard{" "}
-          </a>
-        
-      </div>
-      <div
-        className="  flex flex-col items-center px-8 py-8 text-gray-400 transition-colors duration-300 transform rounded-lg 
-         dark:text-blue-800 hover:bg-blue-800 dark:hover:bg-blue-800 dark:hover:text-blue-200 hover:text-blue-700 text-3xl "
+        </span>
+      </Link>
+
+      <Link
+        to="/users"
+        className={`flex flex-col  items-center rounded my-2 py-4 dark:text-white dark:hover:bg-blue-100
+        hover:bg-blue-900 dark:hover:text-blue-200
+        hover:text-blue-100 text-3xl transition-all delay-300 ease-in-out ${
+          location.pathname === "/users"
+            ? "bg-blue-800 dark:dark:bg-blue-900 dark:text-blue-200 text-blue-100"
+            : "text-blue-900 "
+        }`}
       >
-        <BiUser className="  items-center" />
-        <a
-          href="users"
-          className={` transition-all delay-300 ease-in-out cursor-pointer ${
+        <BiUser className=" transition-all delay-100 ease-in-out items-center" />
+        <span
+          className={` transition-all delay-100 ease-in-out cursor-pointer ${
             menu.menuOpen ? "text-lg" : "hidden "
           }`}
         >
           Profiles{" "}
-        </a>
-      </div>
-      <div
-        className=" flex flex-col items-center px-8 py-8 text-gray-400 transition-colors duration-300 transform rounded-lg
-         dark:text-blue-800 hover:bg-blue-800 dark:hover:bg-blue-800 dark:hover:text-blue-200 hover:text-blue-700 text-3xl "
+        </span>
+      </Link>
+
+      <Link
+        to="/company"
+        className={`flex flex-col  items-center rounded my-2 py-4 dark:text-white dark:hover:bg-blue-100
+        hover:bg-blue-900 dark:hover:text-blue-200
+        hover:text-blue-100 text-3xl transition-all delay-300 ease-in-out ${
+          location.pathname === "/company"
+            ? "bg-blue-800 dark:dark:bg-blue-900 dark:text-blue-200 text-blue-100"
+            : "text-blue-900 "
+        }`}
       >
-        <TbBuildingSkyscraper className=" justify-center items-center" />
-        <a
-          href="company"
-          className={` transition-all delay-300 ease-in-out ${
+        <TbBuildingSkyscraper className=" transition-all delay-100 ease-in-out justify-center items-center" />
+        <span
+          className={` transition-all delay-100 ease-in-out ${
             menu.menuOpen ? "text-lg" : "hidden "
           }`}
         >
           {" "}
           Entreprise{" "}
-        </a>
-      </div>
+        </span>
+      </Link>
 
-      <div
-        className="  flex  flex-col justify-center items-center px-8 py-8 text-gray-400 transition-colors duration-300 transform rounded-lg
-         dark:text-blue-800 hover:bg-blue-800 dark:hover:bg-blue-800 dark:hover:text-blue-200 hover:text-blue-700 text-3xl "
+      <Link
+        to="/partners"
+        className={`flex flex-col  items-center rounded my-2 py-4 dark:text-white dark:hover:bg-blue-100
+        hover:bg-blue-900 dark:hover:text-blue-200
+        hover:text-blue-100 text-3xl transition-all delay-300 ease-in-out  ${
+          location.pathname === "/partners"
+            ? "bg-blue-800 dark:dark:bg-blue-900 dark:text-blue-200 text-blue-100"
+            : "text-blue-900 "
+        }`}
       >
-        <FaHandsHelping className=" justify-center items-center"  />
-        <a
-          href="partners"
-          className={` transition-all delay-300 ease-in-out ${
+        <FaHandsHelping className=" transition-all delay-100 ease-in-out justify-center items-center" />
+        <span
+          className={` transition-all delay-100 ease-in-out ${
             menu.menuOpen ? "text-lg" : "hidden "
           }`}
         >
           Partenaire{" "}
-        </a>
-      </div>
-      <div
-        className="  flex flex-col justify-center items-center px-8 py-8 text-gray-400 transition-colors duration-300 transform rounded-lg
-         dark:text-blue-800 hover:bg-blue-800 dark:hover:bg-blue-800  hover:text-blue-700 text-3xl "
+        </span>
+      </Link>
+
+      <Link
+        to="/statistic"
+        className={`flex flex-col  items-center rounded my-2 py-4 dark:text-white dark:hover:bg-blue-100
+        hover:bg-blue-900 dark:hover:text-blue-200
+        hover:text-blue-100 text-3xl transition-all delay-300 ease-in-out ${
+          location.pathname === "/statistic"
+            ? "bg-blue-800 dark:dark:bg-blue-900 dark:text-blue-200 text-blue-100"
+            : "text-blue-900 "
+        }`}
       >
-        <FaRegChartBar className=" justify-center items-center" />
-        <a
-          href=""
-          className={` transition-all delay-300 ease-in-out ${
+        <FaRegChartBar className=" transition-all delay-100 ease-in-out justify-center items-center" />
+        <span
+          className={` transition-all delay-100 ease-in-out ${
             menu.menuOpen ? "text-lg" : "hidden "
           }`}
         >
           Statistique{" "}
-        </a>
-      </div>
+        </span>
+      </Link>
 
       <div
-        className="flex flex-col items-center px-8 py-8 text-gray-400 transition-colors duration-300 transform rounded-lg
-         dark:text-blue-800 hover:bg-blue-800 dark:hover:bg-blue-800 dark:hover:text-blue-200 hover:text-blue-700 text-3xl "
+        className="flex flex-col  items-center rounded my-2 py-4 dark:text-white dark:hover:bg-blue-100
+        hover:bg-blue-900 dark:hover:text-blue-200
+        hover:text-blue-100 text-3xl transition-all delay-300 ease-in-out "
+        onClick={logout}
       >
-        <RiLogoutBoxRLine className=" justify-center items-center" />
-        <a
-          href=""
-          className={` transition-all delay-300 ease-in-out ${
+        <RiLogoutBoxRLine className=" transition-all delay-100 ease-in-out justify-center items-center" />
+        <span
+          className={` transition-all delay-100 ease-in-out ${
             menu.menuOpen ? "text-lg" : "hidden "
           }`}
         >
           Déconnexion{" "}
-        </a>
-        
+        </span>
       </div>
     </div>
   );
